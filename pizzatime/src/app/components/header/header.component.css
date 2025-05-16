@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+}
+h2 {
+  font-family: "Teko";
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.cab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* melhor que space-around para layout fixo */
+  align-items: center;
+  padding: 0 2rem;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 4em;
+  background-color: #e90530;
+  color: white;
+  z-index: 1000; /* fica acima de outros elementos */
+}
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 5px;
+}
+.logo h2 {
+  align-self: center;
+}
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+.conta-user {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 20px;
+}
+.conta-user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+}
+.conta-user .user-name {
+  align-self: center;
+  font-size: 1rem;
+}
+.btn-sair {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  background-color: #15181f;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.btn-sair:hover {
+  background-color: #ffffff;
+  color: #15181f;
+}
