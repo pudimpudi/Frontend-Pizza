@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ProdutoService {
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.baseUrl + '/produtos';
   constructor(private http: HttpClient){}
 
   findAllProdutos(): Observable<Produto[]>{

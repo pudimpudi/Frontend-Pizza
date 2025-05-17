@@ -4,10 +4,10 @@
 
 footer {
   background-color: #000000;
-  height: 23.4vh;
-  justify-content: space-around;
+  padding: 30px 61px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 footer h2, p {
   color: white;
@@ -96,3 +96,4 @@ footer img {
   background-color: white;
   width: 90vw;
 }
+
