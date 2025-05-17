@@ -2,29 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Funcionario } from '../../entities/funcionario';
-import { environment } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FuncionarioService {
-  baseUrl = environment.baseUrl + '/funcionarios';
-  constructor(private http: HttpClient){}
+    private baseUrl = 'http://localhost:8050/pizzatime/funcionarios';
 
-  findAllFuncionarios(): Observable<Funcionario[]>{
-    return this.http.get<Funcionario[]>(this.baseUrl);
-  }
+    constructor(private http: HttpClient) { }
 
-  adicionarFuncionario(funcionario: FormData): Observable<Funcionario>{
-    return this.http.post<Funcionario>(this.baseUrl, funcionario);
-  }
+    findAllFuncionarios(): Observable<Funcionario[]> {
+        return this.http.get<Funcionario[]>(this.baseUrl);
+    }
 
-  atualizarFuncionario(id:number, funcionario: Funcionario): Observable<Funcionario>{
-    return this.http.put<Funcionario>(`${this.baseUrl}/${id}`, funcionario);
-  }
+    adicionarFuncionario(funcionario: Funcionario): Observable<Funcionario> {
+        return this.http.post<Funcionario>(this.baseUrl, funcionario);
+    }
 
-  apagarFuncionario(id: any): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
-  }
+    atualizarFuncionario(id: number, funcionario: Funcionario): Observable<Funcionario> {
+        return this.http.put<Funcionario>(`${this.baseUrl}/${id}`, funcionario);
+    }
+
+    apagarFuncionario(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    }
+
 }

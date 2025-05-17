@@ -32,73 +32,73 @@ export class ReadAllComponent implements OnInit {
   }
 
   listarProdutos(): void {
-  this.produtoService.findAllProdutos().subscribe({
-    next: (dados) => {
-      // Se a API retornar um array vazio (cenário ideal)
-      this.produtos = dados || []; // Garante que sempre será um array
-      
-      // Se quiser mostrar mensagem quando não houver produtos:
-      if (this.produtos.length === 0) {
-        this.mensagemSucesso = 'Nenhum produto cadastrado ainda.';
-      } else {
-        this.mensagemSucesso = '';
+    this.produtoService.findAllProdutos().subscribe({
+      next: (dados) => {
+        // garante que sera um array
+        this.produtos = dados || [];
+
+        // mostra mensagem quando não houver produtos:
+        if (this.produtos.length === 0) {
+          this.mensagemSucesso = 'Nenhum produto cadastrado ainda.';
+        } else {
+          this.mensagemSucesso = '';
+        }
+      },
+      error: (erro) => {
+        // se a API retornar 404 ou outro erro
+        if (erro.status === 404) {
+          this.produtos = [];
+          this.mensagemSucesso = 'Nenhum produto cadastrado ainda.';
+        } else {
+          console.error('Erro ao carregar produtos:', erro);
+          this.mensagemErro = 'Erro ao carregar produtos. Tente novamente mais tarde.';
+        }
       }
-    },
-    error: (erro) => {
-      // Se a API retornar 404 ou outro erro
-      if (erro.status === 404) {
-        this.produtos = [];
-        this.mensagemSucesso = 'Nenhum produto cadastrado ainda.';
-      } else {
-        console.error('Erro ao carregar produtos:', erro);
-        this.mensagemErro = 'Erro ao carregar produtos. Tente novamente mais tarde.';
-      }
-    }
-  });
-}
+    });
+  }
 
   adicionarProdutos(formProduto: NgForm): void {
-  // Verifica se o formulário é válido
-  if (formProduto.invalid) {
-    this.mensagemErro = 'Por favor, preencha todos os campos corretamente.';
-    this.mensagemSucesso = '';
-    return;
-  }
-
-  // Verifica se o preço é válido
-  if (this.novoProduto.preco <= 0) {
-    this.mensagemErro = 'O preço deve ser maior que zero.';
-    this.mensagemSucesso = '';
-    return;
-  }
-
-  // Limpa mensagens anteriores
-  this.mensagemErro = '';
-  this.mensagemSucesso = '';
-
-  // Chama o serviço para adicionar
-  this.produtoService.adicionarProduto(this.novoProduto).subscribe({
-    next: (produtoAdicionado) => {
-      this.mensagemSucesso = `Produto "${produtoAdicionado.nome}" adicionado com sucesso!`;
-      
-      // Atualiza a lista
-      this.listarProdutos();
-      
-      // Reseta o formulário
-      this.resetarForm(formProduto);
-      
-      // Rolagem automática para a tabela
-      setTimeout(() => {
-        const tabela = document.querySelector('.tabela-container');
-        tabela?.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-    },
-    error: (erro) => {
-      console.error('Erro ao adicionar produto:', erro);
-      this.mensagemErro = erro.error?.message || 'Erro ao adicionar produto. Tente novamente.';
+    // verifica se o formulário é válido
+    if (formProduto.invalid) {
+      this.mensagemErro = 'Por favor, preencha todos os campos corretamente.';
+      this.mensagemSucesso = '';
+      return;
     }
-  });
-}
+
+    // verifica se o preço é válido
+    if (this.novoProduto.preco <= 0) {
+      this.mensagemErro = 'O preço deve ser maior que zero.';
+      this.mensagemSucesso = '';
+      return;
+    }
+
+    // limpa mensagens anteriores
+    this.mensagemErro = '';
+    this.mensagemSucesso = '';
+
+    // chama o serviço para adicionar
+    this.produtoService.adicionarProduto(this.novoProduto).subscribe({
+      next: (produtoAdicionado) => {
+        this.mensagemSucesso = `Produto "${produtoAdicionado.nome}" adicionado com sucesso!`;
+
+        // atualiza a lista
+        this.listarProdutos();
+
+        // reseta o formulário
+        this.resetarForm(formProduto);
+
+        // rolagem automática para a tabela
+        setTimeout(() => {
+          const tabela = document.querySelector('.tabela-container');
+          tabela?.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+      },
+      error: (erro) => {
+        console.error('Erro ao adicionar produto:', erro);
+        this.mensagemErro = erro.error?.message || 'Erro ao adicionar produto. Tente novamente.';
+      }
+    });
+  }
 
   private resetarForm(formProduto: NgForm): void {
     formProduto.resetForm();
@@ -111,13 +111,13 @@ export class ReadAllComponent implements OnInit {
   }
 
   editarProduto(produto: Produto): void {
-    this.modoEdicao = true;
     this.produtoEditando = { ...produto };
+    this.modoEdicao = true;
   }
 
   cancelarEdicao(): void {
-    this.modoEdicao = false;
     this.produtoEditando = null;
+    this.modoEdicao = false;
     this.mensagemErro = '';
     this.mensagemSucesso = '';
   }
@@ -142,9 +142,9 @@ export class ReadAllComponent implements OnInit {
   }
 
 
-    excluirProduto(id: number | undefined): void {
-      if(!id) return;
-      if(confirm('Tem certeza que deseja excluir o produto?')) {
+  excluirProduto(id: number | undefined): void {
+    if (!id) return;
+    if (confirm('Tem certeza que deseja excluir o produto?')) {
       this.produtoService.apagarProduto(id).subscribe({
         next: () => {
           this.mensagemSucesso = 'Produto excluido com sucesso!';

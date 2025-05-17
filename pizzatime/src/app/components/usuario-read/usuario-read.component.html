@@ -1,0 +1,180 @@
+<section class="formulario-cadastro">
+    <div class="card">
+        <h3>{{ modoEdicao ? 'Editar Usuário' : 'Cadastrar Novo Usuário' }}</h3>
+
+        <!-- Mensagens de feedback -->
+        <div *ngIf="mensagemSucesso" class="mensagem-sucesso">
+            <i class="fas fa-check-circle"></i> {{ mensagemSucesso }}
+        </div>
+        <div *ngIf="mensagemErro" class="mensagem-erro">
+            <i class="fas fa-exclamation-circle"></i> {{ mensagemErro }}
+        </div>
+
+        <!-- Formulário de Edição -->
+        <div *ngIf="modoEdicao && funcionarioEditando" class="form-edicao">
+            <form #formEdicao="ngForm">
+                <div class="form-group">
+                    <label for="editNome">Nome Completo</label>
+                    <input type="text" id="editNome" name="nome" [(ngModel)]="funcionarioEditando.nome" 
+                           placeholder="Nome do Usuário" required #editNome="ngModel">
+                    <div *ngIf="editNome.invalid && (editNome.dirty || editNome.touched)" class="error-message">
+                        Nome é obrigatório
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" name="email" [(ngModel)]="funcionarioEditando.email" 
+                           placeholder="Email" required #editEmail="ngModel">
+                    <div *ngIf="editEmail.invalid && (editEmail.dirty || editEmail.touched)" class="error-message">
+                        <div *ngIf="editEmail.errors?.['required']">Email é obrigatório</div>
+                        <div *ngIf="editEmail.errors?.['email']">Formato de email inválido</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editCpf">CPF</label>
+                    <input type="text" id="editCpf" name="cpf" [(ngModel)]="funcionarioEditando.cpf" 
+                           placeholder="000.000.000-00" mask="000.000.000-00" required #editCpf="ngModel">
+                    <div *ngIf="editCpf.invalid && (editCpf.dirty || editCpf.touched)" class="error-message">
+                        <div *ngIf="editCpf.errors?.['required']">CPF é obrigatório</div>
+                        <div *ngIf="editCpf.errors?.['mask']">Formato de CPF inválido</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editSenha">Senha</label>
+                    <input type="password" id="editSenha" name="senha" [(ngModel)]="funcionarioEditando.senha" 
+                           placeholder="Senha" required minlength="6" #editSenha="ngModel">
+                    <div *ngIf="editSenha.invalid && (editSenha.dirty || editSenha.touched)" class="error-message">
+                        <div *ngIf="editSenha.errors?.['required']">Senha é obrigatória</div>
+                        <div *ngIf="editSenha.errors?.['minlength']">Mínimo 6 caracteres</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editCargo">Cargo</label>
+                    <select id="editCargo" name="cargo" [(ngModel)]="funcionarioEditando.cargo" required #editCargo="ngModel">
+                        <option value="" disabled>Selecione o cargo</option>
+                        <option *ngFor="let cargo of cargos" [value]="cargo" [selected]="cargo === funcionarioEditando.cargo">
+                            {{ cargo }}
+                        </option>
+                    </select>
+                    <div *ngIf="editCargo.invalid && (editCargo.dirty || editCargo.touched)" class="error-message">
+                        Cargo é obrigatório
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" (click)="salvarEdicao()" [disabled]="formEdicao.invalid" class="btn-salvar">
+                        <i class="fas fa-save"></i> Salvar
+                    </button>
+                    <button type="button" (click)="cancelarEdicao()" class="btn-cancelar">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Formulário de Cadastro -->
+        <div *ngIf="!modoEdicao">
+            <form (ngSubmit)="adicionarFuncionario(formFuncionario)" #formFuncionario="ngForm">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" [(ngModel)]="novoFuncionario.nome" 
+                           placeholder="Nome do Usuário" required #nome="ngModel">
+                    <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="error-message">
+                        Nome é obrigatório
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" [(ngModel)]="novoFuncionario.email" 
+                           placeholder="Email" required #email="ngModel">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+                        <div *ngIf="email.errors?.['required']">Email é obrigatório</div>
+                        <div *ngIf="email.errors?.['email']">Formato de email inválido</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf" [(ngModel)]="novoFuncionario.cpf" 
+                           placeholder="000.000.000-00" mask="000.000.000-00" required #cpf="ngModel">
+                    <div *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)" class="error-message">
+                        <div *ngIf="cpf.errors?.['required']">CPF é obrigatório</div>
+                        <div *ngIf="cpf.errors?.['mask']">Formato de CPF inválido</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" [(ngModel)]="novoFuncionario.senha" 
+                           placeholder="Senha" required minlength="6" #senha="ngModel">
+                    <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="error-message">
+                        <div *ngIf="senha.errors?.['required']">Senha é obrigatória</div>
+                        <div *ngIf="senha.errors?.['minlength']">Mínimo 6 caracteres</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cargo">Cargo</label>
+                    <select id="cargo" name="cargo" [(ngModel)]="novoFuncionario.cargo" required #cargo="ngModel">
+                        <option value="" disabled selected>Selecione o cargo</option>
+                        <option *ngFor="let cargo of cargos" [value]="cargo">
+                            {{ cargo }}
+                        </option>
+                    </select>
+                    <div *ngIf="cargo.invalid && (cargo.dirty || cargo.touched)" class="error-message">
+                        Cargo é obrigatório
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="formFuncionario.invalid" class="btn-submit">
+                    <i class="fas fa-user-plus"></i> Adicionar Usuário
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="tabela-container">
+        <div *ngIf="funcionarios.length === 0" class="lista-vazia">
+            <i class="fas fa-users-slash"></i>
+            <p>Nenhum funcionário cadastrado</p>
+        </div>
+
+        <table *ngIf="funcionarios.length > 0" class="tabela-funcionarios">
+            <thead>
+                <tr>
+                    <th>NOME</th>
+                    <th>EMAIL</th>
+                    <th>CPF</th>
+                    <th>CARGO</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let funcionario of funcionarios">
+                    <td>{{ funcionario.nome }}</td>
+                    <td>{{ funcionario.email }}</td>
+                    <td>{{ funcionario.cpf | mask: '000.000.000-00' }}</td>
+                    <td><span class="badge" [ngClass]="{
+                        'badge-admin': funcionario.cargo === 'Administrador',
+                        'badge-func': funcionario.cargo === 'Funcionario'
+                    }">{{ funcionario.cargo }}</span></td>
+                    <td class="actions">
+                        <button class="btn-editar" (click)="editarFuncionario(funcionario)">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn-excluir" (click)="excluirFuncionario(funcionario.id)">
+                            <i class="fas fa-trash-alt"></i> Excluir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

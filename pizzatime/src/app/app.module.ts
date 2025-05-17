@@ -14,13 +14,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UsuarioReadComponent } from './components/usuario-read/usuario-read.component';
+import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from 'ngx-mask';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ReadAllComponent,
-    FooterComponent
+    FooterComponent,
+    UsuarioReadComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatBadgeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskDirective, 
+    NgxMaskPipe
   ],
   providers: [
     provideClientHydration(withEventReplay())
