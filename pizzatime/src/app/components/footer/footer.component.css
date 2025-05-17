@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap");
+
+footer {
+  background-color: #000000;
+  height: 23.4vh;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+}
+footer h2, p {
+  color: white;
+}
+footer img {
+  width: 30px;
+}
+.footer1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+.footer2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 5px;
+}
+.logo h2 {
+  align-self: center;
+}
+.logo img {
+  width: 40px;
+  height: 40px;
+  align-self: center;
+}
+.contatos-footer {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.telefone {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 10px;
+}
+.telefone p {
+  align-content: center;
+}
+.telefone img {
+  width: 30px;
+  height: 30px;
+  align-self: center;
+}
+
+.whatszapp {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 10px;
+}
+.whatszapp p {
+  align-content: center;
+}
+.whatszapp img {
+  width: 30px;
+  height: 30px;
+  align-self: center;
+}
+
+.instagram {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 10px;
+}
+.instagram p {
+  align-content: center;
+  cursor: pointer;
+}
+.instagram img {
+  width: 30px;
+  height: 30px;
+  align-self: center;
+}
+
+.divisor-footer {
+  background-color: white;
+  width: 90vw;
+}

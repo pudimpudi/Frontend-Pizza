@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+}
+
+body {
+  background-color: #ececec;
+  padding-top: 70px; /* espaço para o header fixo */
+}
+
+.formulario-cadastro {
+  width: 70%;
+  margin: 20px auto;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.formulario-cadastro h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.formulario-cadastro form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.formulario-cadastro input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  font-size: 14px;
+}
+
+.formulario-cadastro button {
+  padding: 10px 20px;
+  background-color: #e90530;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.formulario-cadastro button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+.tabela-container {
+  width: 70%;
+  margin: 20px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.tabela-produtos {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.tabela-produtos th {
+  background-color: #eee;
+  padding: 15px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.tabela-produtos td {
+  padding: 18px;
+  border-bottom: 1px solid #a3a2a2;
+  text-align: center;
+}
+
+.tabela-produtos img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.tabela-produtos button {
+  padding: 5px 10px;
+  background-color: #e90530;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.tabela-produtos td button {
+  margin-right: 10px; 
+}
+
+.tabela-produtos button:hover {
+  background-color: #3a0808;
+}

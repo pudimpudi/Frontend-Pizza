@@ -1,1 +1,54 @@
-<p>read-all works!</p>
+<body>
+    <section class="formulario-cadastro">
+        <div class="card">
+            <h3>Cadastrar Novo Produto</h3>
+            <form (ngSubmit)="adicionarProdutos()" #formProduto="ngForm">
+                <input type="text" name="nome" [(ngModel)]="novoProduto.nome" placeholder="Nome do Produto" required />
+                <input type="text" name="descricao" [(ngModel)]="novoProduto.descricao" placeholder="Descrição"
+                    required />
+                <input type="number" name="preco" [(ngModel)]="novoProduto.preco" placeholder="Preço" required
+                    step="0.01" />
+
+                <label for="categoria">CATEGORIA</label>
+                <select name="categoria" id="categoria" [(ngModel)]="novoProduto.categoria" required>
+                    <option value="" disabled>Selecione a categoria</option>
+                    <option value="Salgada">Pizza Salgada</option>
+                    <option value="Combo">Combo</option>
+                    <option value="Bebida">Bebida</option>
+                    <option value="Doce">Pizza Doce</option>
+                </select>
+                <button type="submit" [disabled]="formProduto.invalid">Adicionar</button>
+            </form>
+        </div>
+
+
+    </section>
+
+    <section>
+        <div class="tabela-container">
+            <table class="tabela-produtos">
+                <thead>
+                    <tr>
+                        <th>NOME</th>
+                        <th>CATEGORIA</th>
+                        <th>DESCRIÇÃO</th>
+                        <th>PREÇO</th>
+                        <th>AÇÕES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let produto of produtos">
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.categoria }}</td>
+                        <td>{{ produto.descricao }}</td>
+                        <td>R$ {{ produto.preco }}</td>
+                        <td>
+                            <button class="editar" (click)="editarProduto(produto)">Editar</button>
+                            <button class="excluir" (click)="excluirProduto(produto.id)">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
