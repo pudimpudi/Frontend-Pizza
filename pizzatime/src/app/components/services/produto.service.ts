@@ -4,27 +4,27 @@ import { Observable } from 'rxjs';
 import { Produto } from '../../entities/produto';
 import { environment } from '../../environments/environment';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoService {
-  baseUrl = environment.baseUrl + '/produtos';
-  constructor(private http: HttpClient){}
+  private baseUrl = 'http://localhost:8050/pizzatime/produtos';
 
-  findAllProdutos(): Observable<Produto[]>{
+  constructor(private http: HttpClient) {}
+
+  findAllProdutos(): Observable<Produto[]> {
     return this.http.get<Produto[]>(this.baseUrl);
   }
 
-  adicionarProduto(produto: FormData): Observable<Produto>{
+  adicionarProduto(produto: Produto): Observable<Produto> {
     return this.http.post<Produto>(this.baseUrl, produto);
   }
 
-  atualizarProduto(id:number, produto: Produto): Observable<Produto>{
+  atualizarProduto(id: number, produto: Produto): Observable<Produto> {
     return this.http.put<Produto>(`${this.baseUrl}/${id}`, produto);
   }
 
-  apagarProduto(id: any): Observable<void> {
+  apagarProduto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

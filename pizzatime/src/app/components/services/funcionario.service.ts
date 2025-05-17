@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class FuncionarioService {
-  baseUrl = environment.baseUrl
+  baseUrl = environment.baseUrl + '/funcionarios';
   constructor(private http: HttpClient){}
 
   findAllFuncionarios(): Observable<Funcionario[]>{

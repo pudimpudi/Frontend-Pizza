@@ -1,25 +1,60 @@
 <section class="formulario-cadastro">
     <div class="card">
-        <h3>Cadastrar Novo Produto</h3>
-        <form (ngSubmit)="adicionarProdutos()" #formProduto="ngForm">
-            <input type="text" name="nome" [(ngModel)]="novoProduto.nome" placeholder="Nome do Produto" required />
-            <input type="text" name="descricao" [(ngModel)]="novoProduto.descricao" placeholder="Descrição" required />
-            <input type="number" name="preco" [(ngModel)]="novoProduto.preco" placeholder="Preço" required
-                step="0.01" />
+        <h3>{{ modoEdicao ? 'Editar Produto' : 'Cadastrar Novo Produto' }}</h3>
+        
+        <!-- Mensagens de feedback -->
+        <div *ngIf="mensagemSucesso" class="mensagem-sucesso">
+            {{ mensagemSucesso }}
+        </div>
+        <div *ngIf="mensagemErro" class="mensagem-erro">
+            {{ mensagemErro }}
+        </div>
+        
+        <!-- Formulário de Edição -->
+        <div *ngIf="modoEdicao && produtoEditando" class="form-edicao">
+            <form #formEdicao="ngForm">
+                <input type="text" name="nome" [(ngModel)]="produtoEditando.nome" placeholder="Nome do Produto" required />
+                
+                <input type="text" name="descricao" [(ngModel)]="produtoEditando.descricao" placeholder="Descrição" required />
+                
+                <input type="number" name="preco" [(ngModel)]="produtoEditando.preco" placeholder="Preço" required
+                    min="0.01" step="0.01" />
 
-            <label for="categoria">CATEGORIA</label>
-            <select name="categoria" id="categoria" [(ngModel)]="novoProduto.categoria" required>
-                <option value="" disabled>Selecione a categoria</option>
-                <option value="Salgada">Pizza Salgada</option>
-                <option value="Combo">Combo</option>
-                <option value="Bebida">Bebida</option>
-                <option value="Doce">Pizza Doce</option>
-            </select>
-            <button type="submit" [disabled]="formProduto.invalid">Adicionar</button>
-        </form>
+                <select name="categoria" [(ngModel)]="produtoEditando.categoria" required>
+                    <option value="" disabled>Selecione a categoria</option>
+                    <option *ngFor="let categoria of categorias" [value]="categoria" [selected]="categoria === produtoEditando.categoria">
+                        {{ categoria }}
+                    </option>
+                </select>
+                
+                <div class="botoes-edicao">
+                    <button type="button" (click)="salvarEdicao()" [disabled]="formEdicao.invalid">Salvar</button>
+                    <button type="button" class="cancelar" (click)="cancelarEdicao()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Formulário de Cadastro -->
+        <div *ngIf="!modoEdicao">
+            <form (ngSubmit)="adicionarProdutos(formProduto)" #formProduto="ngForm">
+                <input type="text" name="nome" [(ngModel)]="novoProduto.nome" placeholder="Nome do Produto" required />
+                
+                <input type="text" name="descricao" [(ngModel)]="novoProduto.descricao" placeholder="Descrição" required />
+                
+                <input type="number" name="preco" [(ngModel)]="novoProduto.preco" placeholder="Preço" required
+                    min="0.01" step="0.01" />
+
+                <select name="categoria" [(ngModel)]="novoProduto.categoria" required>
+                    <option value="" disabled selected>Selecione a categoria</option>
+                    <option *ngFor="let categoria of categorias" [value]="categoria">
+                        {{ categoria }}
+                    </option>
+                </select>
+                
+                <button type="submit" [disabled]="formProduto.invalid">Adicionar</button>
+            </form>
+        </div>
     </div>
-
-
 </section>
 
 <section>
@@ -39,7 +74,7 @@
                     <td>{{ produto.nome }}</td>
                     <td>{{ produto.categoria }}</td>
                     <td>{{ produto.descricao }}</td>
-                    <td>R$ {{ produto.preco }}</td>
+                    <td>R$ {{ produto.preco | number:'1.2-2' }}</td>
                     <td>
                         <button class="editar" (click)="editarProduto(produto)">Editar</button>
                         <button class="excluir" (click)="excluirProduto(produto.id)">Excluir</button>
