@@ -40,7 +40,8 @@ import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from 'ngx-mask';
     NgxMaskPipe
   ],
   providers: [
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    provideNgxMask()
   ],
   bootstrap: [AppComponent]
 })

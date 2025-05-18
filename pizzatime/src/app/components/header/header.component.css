@@ -52,12 +52,6 @@ h2 {
   align-self: center;
   gap: 20px;
 }
-.conta-user img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  color: white;
-}
 .conta-user .user-name {
   align-self: center;
   font-size: 1rem;
@@ -75,3 +69,27 @@ h2 {
   background-color: #ffffff;
   color: #15181f;
 }
+.menu {
+  list-style: none; /* Remove os marcadores */
+  display: flex;
+  flex-direction: row;
+  gap: 43px;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  /* Nenhum estilo adicional necessário */
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.menu a:hover {
+  color: #000000;
+}
+
