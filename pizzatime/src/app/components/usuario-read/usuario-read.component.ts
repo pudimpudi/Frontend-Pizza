@@ -68,7 +68,6 @@ export class UsuarioReadComponent implements OnInit {
   listarFuncionarios(): void {
     this.funcionarioService.findAllFuncionarios().subscribe({
       next: (dados) => {
-        // garante que sera um array
         this.funcionarios = dados || [];
         // mostra mensagem quando nao houver funcionarios:
         if (this.funcionarios.length === 0) {

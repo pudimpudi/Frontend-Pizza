@@ -34,10 +34,10 @@ export class ReadAllComponent implements OnInit {
   listarProdutos(): void {
     this.produtoService.findAllProdutos().subscribe({
       next: (dados) => {
-        // garante que sera um array
+        
         this.produtos = dados || [];
 
-        // mostra mensagem quando não houver produtos:
+        
         if (this.produtos.length === 0) {
           this.mensagemSucesso = 'Nenhum produto cadastrado ainda.';
         } else {
@@ -45,7 +45,7 @@ export class ReadAllComponent implements OnInit {
         }
       },
       error: (erro) => {
-        // se a API retornar 404 ou outro erro
+        
         if (erro.status === 404) {
           this.produtos = [];
           this.mensagemSucesso = 'Nenhum produto cadastrado ainda.';
@@ -58,36 +58,30 @@ export class ReadAllComponent implements OnInit {
   }
 
   adicionarProdutos(formProduto: NgForm): void {
-    // verifica se o formulário é válido
+
     if (formProduto.invalid) {
       this.mensagemErro = 'Por favor, preencha todos os campos corretamente.';
       this.mensagemSucesso = '';
       return;
     }
 
-    // verifica se o preço é válido
     if (this.novoProduto.preco <= 0) {
       this.mensagemErro = 'O preço deve ser maior que zero.';
       this.mensagemSucesso = '';
       return;
     }
 
-    // limpa mensagens anteriores
     this.mensagemErro = '';
     this.mensagemSucesso = '';
 
-    // chama o serviço para adicionar
     this.produtoService.adicionarProduto(this.novoProduto).subscribe({
       next: (produtoAdicionado) => {
         this.mensagemSucesso = `Produto "${produtoAdicionado.nome}" adicionado com sucesso!`;
 
-        // atualiza a lista
         this.listarProdutos();
 
-        // reseta o formulário
         this.resetarForm(formProduto);
 
-        // rolagem automática para a tabela
         setTimeout(() => {
           const tabela = document.querySelector('.tabela-container');
           tabela?.scrollIntoView({ behavior: 'smooth' });

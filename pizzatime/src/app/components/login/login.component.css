@@ -1,32 +1,28 @@
-.main {
-    background-image: url('/Pizza_fundo.png');
-    background-size: cover;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Arial', sans-serif;
+main {
+  min-height: 100vh;
+  background-image: url('/Pizza_fundo.png');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 0; 
 }
 
 .login-container {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .login-card {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    width: 100%;
-    max-width: 420px;
-    transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
 }
+
 
 .login-card:hover {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
