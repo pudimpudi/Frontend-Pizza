@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Funcionario } from '../../entities/funcionario';
-import { FuncionarioService } from '../../components/services/funcionario.service';
+import { FuncionarioService } from '../../services/funcionario.service';
 import { NgForm } from '@angular/forms';
 
 @Component({

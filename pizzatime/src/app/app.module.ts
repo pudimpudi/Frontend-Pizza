@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuarioReadComponent } from './components/usuario-read/usuario-read.component';
 import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from 'ngx-mask';
+import { LoginComponent } from './components/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from 'ngx-mask';
     HeaderComponent,
     ReadAllComponent,
     FooterComponent,
-    UsuarioReadComponent
+    UsuarioReadComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
