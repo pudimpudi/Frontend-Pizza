@@ -7,7 +7,8 @@
         <li><a routerLink="/produtos">Produtos</a></li>
         <li><a routerLink="/funcionarios">Funcionarios</a></li>
     </div>
-    <div class="conta-user">
-        <button class="btn-sair">Sair</button>
+    <div class="conta-user" *ngIf="authService.isLoggedIn()">
+        <span class="user-name">{{ authService.getCurrentUser()?.nome }}</span>
+        <button class="btn-sair" (click)="logout()">Sair</button>
     </div>
 </header>

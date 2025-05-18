@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {  PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +46,10 @@ import { LoginComponent } from './components/login/login.component';
   ],
   providers: [
     provideClientHydration(withEventReplay()),
-    provideNgxMask()
+    provideNgxMask(),
+    { provide: 'LOCALSTORAGE', useFactory: (platformId: Object) => { 
+      return isPlatformBrowser(platformId) ? window.localStorage : null;
+    }, deps: [PLATFORM_ID] }
   ],
   bootstrap: [AppComponent]
 })
