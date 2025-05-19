@@ -17,7 +17,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: #ececec;
-  padding-top: 70px;
 }
 
 
@@ -30,7 +29,6 @@ app-root {
 
 main {
   flex: 1;
-  padding: 20px 0;
 }
 
 
