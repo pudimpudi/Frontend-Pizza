@@ -19,6 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsuarioReadComponent } from './components/usuario-read/usuario-read.component';
 import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from 'ngx-mask';
 import { LoginComponent } from './components/login/login.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { Header2Component } from './components/header2/header2.component';
+import { ProdutocardComponent } from './components/produtocard/produtocard.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { LoginComponent } from './components/login/login.component';
     ReadAllComponent,
     FooterComponent,
     UsuarioReadComponent,
-    LoginComponent
+    LoginComponent,
+    LandingPageComponent,
+    Header2Component,
+    ProdutocardComponent
   ],
   imports: [
     CommonModule,
